@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Sentiment Analyzer</title>
+	</head>
+	<style>
+		body {
+			background: linear-gradient(45deg, #fc466b, #3f5efb);
+			height: 100vh;
+			font-family: "Montserrat", sans-serif;
+		}
+		.container {
+			position: absolute;
+			transform: translate(-50%, -50%);
+			top: 50%;
+			left: 50%;
+		}
+
+		form {
+			background: rgba(255, 255, 255, 0.3);
+			padding: 3em;
+			height: 320px;
+			border-radius: 20px;
+			border-left: 1px solid rgba(255, 255, 255, 0.3);
+			border-top: 1px solid rgba(255, 255, 255, 0.3);
+			backdrop-filter: blur(10px);
+			box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+			text-align: center;
+			position: relative;
+			transition: all 0.2s ease-in-out;
+		}
+
+		input {
+			background: transparent;
+			width: 500px;
+			padding: 2rem;
+			margin-bottom: 2em;
+			border: none;
+			font-weight: bold;
+			font-size: 16px;
+			border-left: 1px solid rgba(255, 255, 255, 0.3);
+			border-top: 1px solid rgba(255, 255, 255, 0.3);
+			/* height: 500px;
+			width: 500px; */
+			word-break: break-word;
+			border-radius: 20px;
+			backdrop-filter: blur(5px);
+			box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+			/* color: #fff; */
+			font-family: Montserrat, sans-serif;
+			font-weight: 500;
+			transition: all 0.2s ease-in-out;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+		}
+		button {
+			color: #61677c;
+			font-weight: bold;
+			box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.3),
+				5px 5px 20px rgba(255, 255, 255, 0.3);
+			transition: all 0.2s ease-in-out;
+			cursor: pointer;
+			font-weight: 600;
+			padding: 20px;
+			border: 0;
+			outline: 0;
+			font-size: 16px;
+			background: transparent;
+			border: none;
+			border-left: 1px solid rgba(255, 255, 255, 0.3);
+			border-top: 1px solid rgba(255, 255, 255, 0.3);
+			height: 50px;
+			color: black;
+			/* width: 50px; */
+			word-break: break-word;
+			backdrop-filter: blur(5px);
+			box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+			/* color: #fff; */
+			font-family: Montserrat, sans-serif;
+			font-weight: 500;
+			transition: all 0.2s ease-in-out;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+		}
+	</style>
+
+	<body>
+		<div class="container">
+			<form
+				method="post"
+				action="{% url 'homepage' %}"
+				enctype="multipart/form-data"
+			>
+				{% csrf_token %}
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="inputGroup-sizing-default"
+						><h2>Sentiment Analyzer</h2></span
+					>
+					<p>
+						To perform your sentiment analysis, simply type or paste some text
+						into the box below and click the "Analyze Text!" button.
+					</p>
+					<input
+						name="text data"
+						type="text"
+						class="form-control"
+						aria-label="Sizing example input"
+						aria-describedby="inputGroup-sizing-default"
+					/>
+				</div>
+				<br />
+				<div class="col-auto">
+					<button type="submit" name="pred_button" value="Save&Next">
+						Analyze Text
+					</button>
+				</div>
+			</form>
+			{% if result %}
+			<h2>The sentiment of the above sentence is: {{ result }}</h2>
+			{% endif %}
+		</div>
+	</body>
+</html>
